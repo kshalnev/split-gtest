@@ -75,7 +75,7 @@ def GetListOfTestCases(appPath, commandLineArgs):
 #
 
 # Round time
-def RountTime(val):
+def RoundTime(val):
   val = val * 1000.0
   val = int(val + 0.5)
   val = float(val) / 1000.0
@@ -153,13 +153,13 @@ def ExecuteTestCases(appPath, commandLineArgs, testCases):
           testCaseTime = float(testCaseNode.getAttribute("time"))
           testCaseXml = testCaseNode.toxml()
         else:
-          testCaseTime = RountTime(float(time.time()) - testCaseStartTime)
+          testCaseTime = RoundTime(float(time.time()) - testCaseStartTime)
           testCaseXml = '<testcase name="' + testCase['TestCaseName'] + '" status="noxml" time="' + str(testCaseTime) + '" classname="' + testCase['TestSuiteName'] + '" />'
 
         RenameFile(outputXmlPath, outputXmlPath + "." + testCase['TestSuiteName'] + "." + testCase['TestCaseName'] + ".xml")
 
       else:
-        testCaseTime = RountTime(float(time.time()) - testCaseStartTime)
+        testCaseTime = RoundTime(float(time.time()) - testCaseStartTime)
 
     else:
       testCaseSkipped = 1
@@ -183,7 +183,7 @@ def ExecuteTestCases(appPath, commandLineArgs, testCases):
     countFailed += testCaseFailed
     countSkipped += testCaseSkipped
 
-  totalTime = RountTime(float(time.time()) - startTime)
+  totalTime = RoundTime(float(time.time()) - startTime)
 
   return {'TestSuitesResults':testSuitesResults, 'Tests':len(testCases), 'Passed':countPassed, 'Failed':countFailed, 'Skipped':countSkipped, 'Time':totalTime, 'ExitCode':exitCode, 'Timestamp':timestamp, 'Name':'AllTests'}
 
